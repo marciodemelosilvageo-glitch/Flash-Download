@@ -1,0 +1,6 @@
+{
+  "name": "Flash Dowlooad",
+  "description": "Video downloader utilizing yt-dlp to support multiple platforms including YouTube, TikTok, and Facebook.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
