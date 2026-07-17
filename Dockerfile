@@ -1,6 +1,6 @@
 FROM node:20-bullseye-slim
 
-# Install system dependencies required by yt-dlp (Python, FFmpeg)
+# Instala dependências do sistema necessárias para o yt-dlp (Python, FFmpeg)
 RUN apt-get update && apt-get install -y \
     python3 \
     ffmpeg \
@@ -9,23 +9,23 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
-# Copy package files and install dependencies
+# Copia os arquivos de configuração e instala dependências do Node.js
 COPY package*.json ./
 RUN npm install
 
-# Copy the rest of the application
+# Copia o restante dos arquivos do aplicativo
 COPY . .
 
-# Download the yt-dlp binary explicitly during the build step
+# Baixa o binário do yt-dlp diretamente durante o build
 RUN mkdir -p ./bin && \
     wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -O ./bin/yt-dlp && \
     chmod +x ./bin/yt-dlp
 
-# Build the frontend and backend
+# Compila o site (frontend e backend)
 RUN npm run build
 
-# Expose port 3000
+# Expõe a porta 3000
 EXPOSE 3000
 
-# Start the application
+# Comando para iniciar o servidor
 CMD ["npm", "start"]
